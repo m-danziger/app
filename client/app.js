@@ -1,14 +1,12 @@
-let tasks = [];
+let tasks = []
 
-/** {
-    id : 1,
-    title : '',
-    dueDate : null,
-    done : false,
-    description : '',
-    userName : ''
+async function main() {
+  let response = await fetch('http://localhost:3000/tasks')
+  tasks = await response.json();
+  console.log(tasks)
+
 }
-*/
+main()
 
 function addTaskBtnClicked() {
   //get the task title from the input
