@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do-App</title>
+  <link rel="stylesheet" type="text/css" href="./dom.css" />
+  <script src="./app.js"></script>
+  <script src="./dom.js"></script>
+  <script src="./remove.js"></script>
+  <script>
+    /*var a = prompt(`please enter your name`)
+    function d() {
+      var b = document.querySelector('#z');
+      var c = b.innerText = a;
+    }
+    addEventListener("DOMContentLoaded", d)*/
+  </script>
+</head>
+
+<body>
+
+  <div class="login-container">
+    <input id="y" type="text" placeholder="please enter your user name">
+    <button id="x" onclick="inputfunction()">login</button>
+  </div>
+
+  <div class="todo-container" style="display:none">
+    <h1 id=app-title></h1>
+    <p>welcome <span id="user-name"></span></p>
+    <div class="input-container">
+      <input type="text" id="new-task" placeholder="add a new task">
+      <button class="add-tesk" onclick="addTaskBtnClicked()">+</button>
+    </div>
+    <section class="task-list" id="todo-list">
+
+    </section>
+    <section class="task-list completed" id="done-list"></section>
+  </div>
+</body>
+
+</html>
