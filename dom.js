@@ -7,10 +7,15 @@ const TITLE = `welcome to our ToDo app !!!`
     }*/
 
 function inputfunction() {
-    /*let inputBtn = document.querySelector('#y');
-    let userName = inputBtn.value;/*
-    /*document.querySelector('#r').innerHTML = userName*/
 
+    
+    /*document.querySelector('#r').innerHTML = userName*/
+    let inputBtn = document.querySelector('#y')
+    let userName = inputBtn.value;
+    if (userName.trim() === "") {
+        alert("Please enter a valid username.");
+        return;
+      }
 
     let loginbtn1 = document.querySelector('#x')
     loginbtn1.innerText = 'loging... in';
@@ -19,7 +24,7 @@ function inputfunction() {
     function displayApp() {
         let container = document.querySelector('.todo-container');
         container.style.display = 'block';
-        let welcomectr = document.querySelector('.z')
+        let welcomectr = document.querySelector('.login-container')
         welcomectr.style.display = 'none'
 
     }
