@@ -1,19 +1,14 @@
 let tasks = []
-
 async function main() {
-  let response = await fetch('http://localhost:3000/tasks')
-  tasks = await response.json();
+let response = await fetch('http://localhost:3000/tasks')
+ tasks = await response.json();
   console.log(tasks)
-
 }
 main()
 
-function addTaskBtnClicked() {
-  //get the task title from the input
-  //get the task input element
+async function addTaskBtnClicked() {
   let inputElement = document.querySelector("#new-task");
 
-  //get the value of the element
   let newTaskValue = inputElement.value;
 
   if (!newTaskValue) return;
@@ -22,10 +17,19 @@ function addTaskBtnClicked() {
     title: newTaskValue,
     done: false
   };
-  //add the task object to the tasks array
   tasks.push(newTaskObject);
 
-  //display the task in the document
+
+  let response = await fetch('http://localhost:3000/tasks', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newTaskObject)
+  })
+  const result = await response.json()
+  console.log(result)
+
   displayTasks();
 }
 
@@ -43,7 +47,7 @@ function displayTasks() {
     let taskElement = buildTaskElement(task, i);
     if (task.done) {
       doneSectionElement.appendChild(taskElement);
-    } if (!task.done) {
+    } else {
       todoSectionElement.appendChild(taskElement);
     }
   }
@@ -101,3 +105,7 @@ function buildTaskElement(task, index) {
 
   return taskElement;
 }
+
+
+
+

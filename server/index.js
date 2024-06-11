@@ -4,21 +4,14 @@ import pgPromise from 'pg-promise';
 
 const app = express()
 app.use(cors())
+//app.use(express.json())
 
-
-app.listen(3000, () => {
-    console.log(`the server is running on port 3000`)
-})
-
-app.get('/api', (req, res, next) => {
-    console.log("hi 1")
-    next()
- }, (a, b) => {
-        b.send('hi from api')
-    })
+const tasks = []
 
 app.post('/tasks', (req, res) => {
-    req.send()
+    console.log('body', req.body)
+    tasks.push(req.body)
+    res.json(req.body)
 })
 
 app.get('/tasks', (req, res) => {
@@ -28,10 +21,12 @@ app.get('/tasks', (req, res) => {
         done: false
     }, {
         title: "newTaskValue2",
-        done: false
+        done: true
     }]
 
     res.json(tasks1)
 })
 
-
+app.listen(3000, () => {
+    console.log(`the server is running on port 3000`)
+})
