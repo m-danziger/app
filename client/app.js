@@ -1,4 +1,3 @@
-
 async function main() {
 let response = await fetch('http://localhost:3000/tasks')
  tasks = await response.json();
@@ -13,8 +12,12 @@ async function addTaskBtnClicked() {
 
   if (!newTaskValue) return;
 
+  function generateRandomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   let newTaskObject = {
-    
+    id : generateRandomInteger(1, 10000),
     title: newTaskValue,
     done: false
   };
@@ -46,7 +49,7 @@ function displayTasks() {
   for (let i = 0; i < tasks.length; i++) {
     let task = tasks[i];
 
-    let taskElement = buildTaskElement(task, i);
+    let taskElement = buildTaskElement(task, task.id);
     if (task.done) {
       doneSectionElement.appendChild(taskElement);
     } else {
@@ -55,9 +58,12 @@ function displayTasks() {
   }
 }
 
-function taskCompleted(btnComleteElement) {
+async function taskCompleted(btnComleteElement) {
   let id = btnComleteElement.parentNode.parentNode.getAttribute('data-task-id');
-  tasks[id].done = true;
+  await fetch (`http://localhost:3000/tasks/${id}`,{
+    method: 'PATCH'
+  })
+  tasks.find((task) => Number(task.id).toString() === id).done = true;
   displayTasks();
 }
 

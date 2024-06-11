@@ -18,15 +18,11 @@ app.get('/tasks', (req, res) => {
     res.json(tasks)	
 })
 
-/*app.patch('/tasks/:id', (req, res) => {	
-    console.log('tasks', tasks)	
-    console.log(':id param', req.params.id)	
-    let task = tasks.find((task) => Number(task.id).toString() === req.params.id)	
-    if (task) {	
-        task.done = true;	
-    }
+app.patch('/tasks/:id', (req, res) => {	
+    let task = tasks.find((task) => task.id.toString() === req.params.id)	
+    task.done = true;	
     res.json(tasks)	
-})*/
+})
 
 app.listen('3000', () => {
     console.log('the server is now running on port 3000')	
