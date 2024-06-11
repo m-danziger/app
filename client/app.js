@@ -1,4 +1,4 @@
-let tasks = []
+
 async function main() {
 let response = await fetch('http://localhost:3000/tasks')
  tasks = await response.json();
@@ -14,19 +14,21 @@ async function addTaskBtnClicked() {
   if (!newTaskValue) return;
 
   let newTaskObject = {
+    
     title: newTaskValue,
     done: false
   };
   tasks.push(newTaskObject);
 
 
-  let response = await fetch('http://localhost:3000/tasks', {
+  const response = await fetch('http://localhost:3000/tasks', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(newTaskObject)
   })
+    
   const result = await response.json()
   console.log(result)
 
@@ -105,7 +107,3 @@ function buildTaskElement(task, index) {
 
   return taskElement;
 }
-
-
-
-
