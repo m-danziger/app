@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors';	
+import pgpromise from 'pg-promise'
 
 
 const app = express()	
