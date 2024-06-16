@@ -24,7 +24,7 @@ async function addTaskBtnClicked() {
   tasks.push(newTaskObject);
 
 
-  const response = await fetch('http://localhost:3000/tasks', {
+  let response = await fetch('http://localhost:3000/tasks', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -37,6 +37,7 @@ async function addTaskBtnClicked() {
 
   displayTasks();
 }
+
 
 function displayTasks() {
 

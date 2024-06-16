@@ -17,27 +17,45 @@ const db = pgp({
 });
 
 
-let tasks = []
+// let tasks = []
 
 /*app.get('/hi', async (req, res) => {
     let a =  await db.one('select * from todos.task')
      res.json(a)
  })*/
 
-app.post('/tasks', (req, res) => {
-    tasks.push(req.body)
-    console.log(req)
-    res.json(req.body)
+app.post('/tasks', async (req, res) => {
+    // tasks.push(req.body)
+    const b = await db.one('insert into todos.task (title, user_id) values (${title}, ${user_id}) returning *', {
+        title: req.body.title,
+        user_id: 1
+    })
+    res.json({
+        title: b.title,
+        done: false,
+        id: b.user_id
+    })
 })
 
-app.get('/tasks', (req, res) => {
-    res.json(tasks)
+app.get('/tasks', async (req, res) => {
+    let a = await db.any('select * from todos.task where deleted_at is null')
+    res.json(a.map(task => ({ id: task.id, title: task.title, done: task.status !== 'active' })))
 })
 
-app.patch('/tasks/:id', (req, res) => {
-    let task = tasks.find((task) => task.id.toString() === req.params.id)
-    task.done = true;
-    res.json(tasks)
+app.patch('/tasks/:id', async (req, res) => {
+    // let task = tasks.find((task) => task.id.toString() === req.body.id)
+    await db.any("update todos.task SET status = 'done' where id = ${id}", {
+        id: req.params.id
+    })
+    //task.done = true;
+    res.json()
+})
+
+app.delete('/tasks/:id', async (req, res) => {
+    await db.any("update todos.task SET deleted_at = now() where id = ${id}", {
+        id: req.params.id
+    })
+    res.json()
 })
 
 app.listen('3000', () => {
