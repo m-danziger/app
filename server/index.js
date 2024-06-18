@@ -37,6 +37,36 @@ app.post('/tasks', async (req, res) => {
     })
 })
 
+app.post('/users', async (req, res) => {
+    let r = await db.one('insert into todos.person ("userName", email, pass) values (${name}, ${gmail}, ${password}) returning *',{
+        name : req.body.name,
+        gmail : req.body.gmail,
+        password :req.body.password 
+})
+    res.json({
+        name : r.name,
+        gmail : r.gmail,
+        password :r.password 
+    })
+})
+
+
+
+app.post('/login', async (req, res) => {
+    let r = await db.one(`select * from todos.person where "userName" = 'martin' and pass = 'passw0rd'`,)
+        res.json(r)
+})
+
+app.get('/login', async (req, res) => {
+    let r = await db.one(`select * from todos.person where "userName" = 'martin' and pass = 'passw0rd'`,)
+        res.json(r)
+})
+
+app.get('/users', async (req, res) => {
+    let a = await db.any('select * from todos.person')
+    res.json(a)
+})
+
 app.get('/tasks', async (req, res) => {
     let a = await db.any('select * from todos.task where deleted_at is null')
     res.json(a.map(task => ({ id: task.id, title: task.title, done: task.status !== 'active' })))
@@ -61,3 +91,5 @@ app.delete('/tasks/:id', async (req, res) => {
 app.listen('3000', () => {
     console.log('the server is now running on port 3000')
 })
+
+
