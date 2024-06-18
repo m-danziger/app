@@ -22,8 +22,17 @@
 <body>
 
   <div class="login-container">
-    <input id="y" type="text" placeholder="please enter your user name">
-    <button id="x" onclick="inputfunction()">login</button>
+    <input id="y" type="text" placeholder="please enter your username"><br>
+    <input id="inputPassword" type="password" placeholder="please enter your pasword"><br>
+    <button class="loginBtn" id="x" onclick="inputfunction()">Click here to login</button><br>
+    <button class="loginBtn" id="createUsernameBtn" onclick="createUsername()">Create new account</button>
+  </div>
+<br>
+  <div class="createNewUser" style="display: none;">
+    <input id="inputNewUserName" type="text" placeholder="Enter A New User Name">
+    <input id="inputNewPassword" type="text" placeholder="Enter A New Password">
+    <button class="loginBtn" id="createBtn" onclick="createBtn()"> Next </button>
+    <button class="loginBtn" id="backBtn" onclick="backBtn()">Cancel</button>
   </div>
 
   <div class="todo-container" style="display:none">
@@ -41,4 +50,3 @@
 </body>
 
 </html>
-
