@@ -25,8 +25,8 @@ async function addTaskBtnClicked() {
   };
   tasks.push(newTaskObject);
 
-
-  let response = await fetch('http://localhost:3000/tasks', {
+  userIdLogin = 18
+  let response = await fetch(`http://localhost:3000/tasks?userIdLogin=${userIdLogin}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
