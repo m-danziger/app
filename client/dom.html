@@ -22,10 +22,12 @@
 <body>
 
   <div class="login-container">
-    <input id="y" type="text" placeholder="please enter your username"><br>
+    <input id="inputUsername" type="text" placeholder="please enter your username"><br>
     <input id="inputPassword" type="password" placeholder="please enter your pasword"><br>
-    <button class="loginBtn" id="x" onclick="inputfunction()">Click here to login</button><br>
-    <button class="loginBtn" id="createUsernameBtn" onclick="createUsername()">Signup new account</button>
+    <button class="loginBtn" id="loginBtnId" onclick="inputfunction()">Click here to login</button><br>
+    <button class="loginBtn" id="createUsernameBtn" onclick="createUsername()">Signup new account</button><br>
+    <p align="center" id="Asire" style="display: none; color: blue;">The login was successful</p>
+    <p align="center" id="sire" style="display: none; color: red;">Username And/Or Password is incorrect</p>
   </div>
 
   <div class="createNewUser" style="display: none;">

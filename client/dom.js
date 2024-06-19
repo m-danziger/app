@@ -1,23 +1,29 @@
 const TITLE = `welcome to our ToDo app !!!`
 
 /*onload = function(){
-    document.querySelector('#x')
+    document.querySelector('#loginBtnId')
         .addEventListener('click',inputfunction);
 
     }*/
 
-function inputfunction() {
+
+
+
+
+
+
+function logingFunction() {
 
 
     /*document.querySelector('#r').innerHTML = userName*/
-    let inputBtn = document.querySelector('#y')
+    let inputBtn = document.querySelector('#inputUsername')
     let userName = inputBtn.value;
     if (userName.trim() === "") {
         alert("Please enter a valid username.");
         return;
     }
 
-    let loginbtn1 = document.querySelector('#x')
+    let loginbtn1 = document.querySelector('#loginBtnId')
     loginbtn1.innerText = 'loging... in';
     setTimeout(displayApp, 1000);
 
@@ -31,7 +37,7 @@ function inputfunction() {
     displayTitle();
     displayTasks();
 
-    document.querySelector('#user-name').innerText = document.querySelector('#y').value;
+    document.querySelector('#user-name').innerText = document.querySelector('#inputUsername').value;
 }
 
 

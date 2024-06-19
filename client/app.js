@@ -155,4 +155,53 @@ async function createBtn() {
 
   backBtn()
 
-} 
+}
+
+
+async function inputfunction() {
+  try {
+
+    let a = document.getElementById('inputUsername').value
+    let b = document.getElementById('inputPassword').value
+
+
+
+
+    let rLogin = await fetch('http://localhost:3000/login', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: a,
+        password: b
+      })
+    })
+
+    const resultRLogin = await rLogin.json()
+    console.log(resultRLogin)
+
+    if (rLogin.ok) {
+      let userId = resultRLogin.id
+      let a = document.querySelector('#Asire')
+      a.style.display = 'block';
+      logingFunction(userId);
+    } else {
+      showError()
+    }
+  } catch (error) {
+    console.error(`An error occurred: ${error}`);
+  }
+}
+
+function showError() {
+  document.querySelector("#sire").style.display = 'block';
+  setTimeout(hideError, 2000)
+
+  function hideError() {
+    document.querySelector("#sire").style.display = 'none';
+  }
+}
+
+
+
