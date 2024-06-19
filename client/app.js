@@ -178,14 +178,15 @@ async function inputfunction() {
       })
     })
 
-    const resultRLogin = await rLogin.json()
+    let resultRLogin = await rLogin.json()
     console.log(resultRLogin)
 
     if (rLogin.ok) {
-      let userId = resultRLogin.id
+     let userIdLogin = resultRLogin.id
+     
       let a = document.querySelector('#Asire')
       a.style.display = 'block';
-      logingFunction(userId);
+      logingFunction(userIdLogin);
     } else {
       showError()
     }
@@ -202,6 +203,3 @@ function showError() {
     document.querySelector("#sire").style.display = 'none';
   }
 }
-
-
-

@@ -77,9 +77,9 @@ app.get('/users', async (req, res) => {
 })
 
 app.get('/tasks', async (req, res) => {
-    const userId = req.query.userId;
+    const userId = req.query.userIdLogin;
     let a = await db.any('select * from todos.task where user_id = ${idUser} AND deleted_at is null', {
-        "idUser": "18"
+        "idUser": userId
     })
     res.json(a.map(task => ({ id: task.id, title: task.title, done: task.status !== 'active' })))
 })
