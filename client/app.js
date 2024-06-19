@@ -6,7 +6,6 @@ async function main(userIdLogin) {
   // console.log(tasks)
 }
 
-
 async function addTaskBtnClicked() {
   let inputElement = document.querySelector("#new-task");
 
@@ -25,7 +24,6 @@ async function addTaskBtnClicked() {
   };
   tasks.push(newTaskObject);
 
-  userIdLogin = 18
   let response = await fetch(`http://localhost:3000/tasks?userIdLogin=${userIdLogin}`, {
     method: 'POST',
     headers: {
