@@ -38,16 +38,11 @@ app.post('/tasks', async (req, res) => {
 })
 
 app.post('/users', async (req, res) => {
-    let r = await db.one('insert into todos.person ("userName", email, pass) values (${name}, ${gmail}, ${password}) returning *',{
+    let r = await db.one('insert into todos.person ("userName", pass) values (${name}, ${password}) returning *',{
         name : req.body.name,
-        gmail : req.body.gmail,
         password :req.body.password 
 })
-    res.json({
-        name : r.name,
-        gmail : r.gmail,
-        password :r.password 
-    })
+    res.json('ok')
 })
 
 

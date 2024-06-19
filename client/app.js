@@ -2,86 +2,86 @@
 
 async function main() {
   let response = await fetch('http://localhost:3000/tasks')
-   tasks = await response.json();
-   // console.log(tasks)
+  tasks = await response.json();
+  // console.log(tasks)
+}
+main()
+
+async function addTaskBtnClicked() {
+  let inputElement = document.querySelector("#new-task");
+
+  let newTaskValue = inputElement.value;
+
+  if (!newTaskValue) return;
+
+  function generateRandomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-  main()
-  
-  async function addTaskBtnClicked() {
-    let inputElement = document.querySelector("#new-task");
-  
-    let newTaskValue = inputElement.value;
-  
-    if (!newTaskValue) return;
-  
-    function generateRandomInteger(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
+
+  let newTaskObject = {
+    id: generateRandomInteger(1, 10000),
+    title: newTaskValue,
+    done: false
+  };
+  tasks.push(newTaskObject);
+
+
+  let response = await fetch('http://localhost:3000/tasks', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newTaskObject)
+  })
+
+  const result = await response.json()
+  console.log(result)
+
+  displayTasks();
+}
+
+
+function displayTasks() {
+
+  let todoSectionElement = document.querySelector("#todo-list");
+  todoSectionElement.innerHTML = `<h2 class="task-header">To Do: <span></span></h2>`;
+
+  let doneSectionElement = document.querySelector('#done-list');
+  doneSectionElement.innerHTML = `<h2 class="task-header">Done: <span></span></h2>`;
+
+  for (let i = 0; i < tasks.length; i++) {
+    let task = tasks[i];
+
+    let taskElement = buildTaskElement(task, task.id);
+    if (task.done) {
+      doneSectionElement.appendChild(taskElement);
+    } else {
+      todoSectionElement.appendChild(taskElement);
     }
-  
-    let newTaskObject = {
-      id : generateRandomInteger(1, 10000),
-      title: newTaskValue,
-      done: false
-    };
-    tasks.push(newTaskObject);
-  
-  
-    let response = await fetch('http://localhost:3000/tasks', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newTaskObject)
-    })
-      
-    const result = await response.json()
-    console.log(result)
-  
-    displayTasks();
   }
-  
-  
-  function displayTasks() {
-  
-    let todoSectionElement = document.querySelector("#todo-list");
-    todoSectionElement.innerHTML = `<h2 class="task-header">To Do: <span></span></h2>`;
-  
-    let doneSectionElement = document.querySelector('#done-list');
-    doneSectionElement.innerHTML = `<h2 class="task-header">Done: <span></span></h2>`;
-  
-    for (let i = 0; i < tasks.length; i++) {
-      let task = tasks[i];
-  
-      let taskElement = buildTaskElement(task, task.id);
-      if (task.done) {
-        doneSectionElement.appendChild(taskElement);
-      } else {
-        todoSectionElement.appendChild(taskElement);
-      }
-    }
-  }
-  
-  async function taskCompleted(btnComleteElement) {
-    let id = btnComleteElement.parentNode.parentNode.getAttribute('data-task-id');
-    await fetch (`http://localhost:3000/tasks/${id}`,{
-      method: 'PATCH'
-    })
-    tasks.find((task) => Number(task.id).toString() === id).done = true;
-    displayTasks();
-  }
-  
-  
-  function buildTaskElement(task, index) {
-    let taskElement = document.createElement("div");
-    taskElement.classList.add("task");
-    //
-    taskElement.setAttribute('data-task-id', index);
-  
-  
-    taskElement.innerHTML = `<p>${task.title}</p>
+}
+
+async function taskCompleted(btnComleteElement) {
+  let id = btnComleteElement.parentNode.parentNode.getAttribute('data-task-id');
+  await fetch(`http://localhost:3000/tasks/${id}`, {
+    method: 'PATCH'
+  })
+  tasks.find((task) => Number(task.id).toString() === id).done = true;
+  displayTasks();
+}
+
+
+function buildTaskElement(task, index) {
+  let taskElement = document.createElement("div");
+  taskElement.classList.add("task");
+  //
+  taskElement.setAttribute('data-task-id', index);
+
+
+  taskElement.innerHTML = `<p>${task.title}</p>
       <div>
       ${task.done ? "" :
-        `<button onclick="taskCompleted(this)">
+      `<button onclick="taskCompleted(this)">
           <svg
             width="19"
             height="24"
@@ -113,10 +113,46 @@ async function main() {
           </svg>
         </button>
       </div>`;
-  
-    return taskElement;
-  }
 
-  function createBtn(){
-    console.log('a')
-  }
+  return taskElement;
+}
+
+function createBtn() {
+  console.log('a')
+}
+
+
+async function createBtn() {
+  let userNameInputElement = document.querySelector("#inputNewUserName");
+
+  let valueUserNameInputElement = userNameInputElement.value;
+
+  if (!valueUserNameInputElement) return;
+
+
+  let passInputElement = document.querySelector("#inputNewPassword");
+
+  let valuePassInputElement = passInputElement.value;
+
+  if (!valuePassInputElement) return;
+
+
+  let newUserObject = {
+    name: valueUserNameInputElement,
+    password: valuePassInputElement
+  };
+
+  let response = await fetch('http://localhost:3000/users', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newUserObject)
+  })
+
+  const result = await response.json()
+  console.log(result)
+
+  backBtn()
+
+} 

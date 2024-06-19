@@ -64,4 +64,8 @@ function backBtn() {
     a.style.display = 'none'
     let welcomectr = document.querySelector('.login-container')
     welcomectr.style.display = 'block'
+    let userNameInputElement = document.querySelector("#inputNewUserName");
+    let passInputElement = document.querySelector("#inputNewPassword");
+    userNameInputElement.value = "";
+    passInputElement.value = "";
 }
