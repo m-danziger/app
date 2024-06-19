@@ -67,13 +67,23 @@ app.post('/login', async (req, res) => {
 })
 
 app.get('/login', async (req, res) => {
-    let r = await db.one(`select * from todos.person where "userName" = 'martin' and pass = 'passw0rd'`,)
-    res.json(r)
+    try {
+        let r = await db.one(`select * from todos.person where "userName" = 'martin' and pass = 'passw0rd'`,)
+        res.json(r)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'get Login failed' })
+    }
 })
 
 app.get('/users', async (req, res) => {
-    let a = await db.any('select * from todos.person')
-    res.json(a)
+    try {
+        let a = await db.any('select * from todos.person')
+        res.json(a)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'users Login failed' })
+    }
 })
 
 app.get('/tasks', async (req, res) => {

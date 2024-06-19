@@ -1,11 +1,11 @@
 // let tasks = []
 
-async function main() {
-  let response = await fetch('http://localhost:3000/tasks')
+async function main(userIdLogin) {
+  let response = await fetch(`http://localhost:3000/tasks?userIdLogin=${userIdLogin}`);
   tasks = await response.json();
   // console.log(tasks)
 }
-main()
+
 
 async function addTaskBtnClicked() {
   let inputElement = document.querySelector("#new-task");
@@ -159,13 +159,11 @@ async function createBtn() {
 
 
 async function inputfunction() {
+
   try {
 
     let a = document.getElementById('inputUsername').value
     let b = document.getElementById('inputPassword').value
-
-
-
 
     let rLogin = await fetch('http://localhost:3000/login', {
       method: 'post',
@@ -182,11 +180,15 @@ async function inputfunction() {
     console.log(resultRLogin)
 
     if (rLogin.ok) {
-     let userIdLogin = resultRLogin.id
-     
+      let userIdLogin = resultRLogin.id
+      console.log(userIdLogin)
       let a = document.querySelector('#Asire')
       a.style.display = 'block';
-      logingFunction(userIdLogin);
+
+      await main(userIdLogin),
+
+        logingFunction()
+
     } else {
       showError()
     }
