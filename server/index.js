@@ -38,23 +38,37 @@ app.post('/tasks', async (req, res) => {
 })
 
 app.post('/users', async (req, res) => {
-    let r = await db.one('insert into todos.person ("userName", pass) values (${name}, ${password}) returning *',{
-        name : req.body.name,
-        password :req.body.password 
-})
+    let r = await db.one('insert into todos.person ("userName", pass) values (${name}, ${password}) returning *', {
+        name: req.body.name,
+        password: req.body.password
+    })
     res.json('ok')
 })
 
 
 
-app.post('/login', async (req, res) => {
+/*app.post('/login', async (req, res) => {
     let r = await db.one(`select * from todos.person where "userName" = 'martin' and pass = 'passw0rd'`,)
         res.json(r)
+})*/
+
+app.post('/login', async (req, res) => {
+    try {
+        let r = await db.one('select * from todos.person where "userName" = ${name} AND pass = ${password}', {
+            "name": req.body.name,
+            "password": req.body.password
+        })
+        res.json(r)
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'Login failed' });
+    }
 })
 
 app.get('/login', async (req, res) => {
     let r = await db.one(`select * from todos.person where "userName" = 'martin' and pass = 'passw0rd'`,)
-        res.json(r)
+    res.json(r)
 })
 
 app.get('/users', async (req, res) => {
