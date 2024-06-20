@@ -76,3 +76,12 @@ function backBtn() {
     userNameInputElement.value = "";
     passInputElement.value = "";
 }
+
+
+function enterBtn() {
+    document.getElementById('enterBtnClicked').addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            document.getElementById('loginBtnId').click();
+        }
+    });
+}
