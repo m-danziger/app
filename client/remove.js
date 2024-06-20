@@ -5,13 +5,13 @@ async function taskRemove(btnRemove) {
     let a = await fetch(`http://localhost:3000/tasks/${id}`, {
       method: 'DELETE'
     });
-    
+
     if (a.ok) {
       let taskIndex = tasks.findIndex((task) => Number(task.id).toString() === id);
       if (taskIndex !== -1) {
         tasks.splice(taskIndex, 1);
         displayTasks();
-      } 
+      }
 
     }
   }
