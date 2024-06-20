@@ -6,7 +6,7 @@ async function main(userIdLogin) {
   // console.log(tasks)
 }
 
-async function addTaskBtnClicked() {
+async function addTaskBtnClicked(userIdLogin) {
   let inputElement = document.querySelector("#new-task");
 
   let newTaskValue = inputElement.value;
@@ -184,8 +184,8 @@ async function inputfunction() {
       a.style.display = 'block';
 
       await main(userIdLogin),
-
-        logingFunction()
+        await addTaskBtnClicked(userIdLogin)
+      logingFunction()
 
     } else {
       showError()
