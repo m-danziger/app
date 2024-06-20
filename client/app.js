@@ -6,7 +6,7 @@ async function main(userIdLogin) {
   // console.log(tasks)
 }
 
-async function addTaskBtnClicked(userIdLogin) {
+async function addTaskBtnClicked() {
   let inputElement = document.querySelector("#new-task");
 
   let newTaskValue = inputElement.value;
@@ -23,8 +23,8 @@ async function addTaskBtnClicked(userIdLogin) {
     done: false
   };
   tasks.push(newTaskObject);
-
-  let response = await fetch(`http://localhost:3000/tasks?userIdLogin=${userIdLogin}`, {
+var userLoginId = localStorage.getItem('user-id');
+  let response = await fetch(`http://localhost:3000/tasks?userIdLogin=${userLoginId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -180,6 +180,7 @@ async function inputfunction() {
     if (rLogin.ok) {
       let userIdLogin = resultRLogin.id
       console.log(userIdLogin)
+      localStorage.setItem('user-id', userIdLogin);
       let a = document.querySelector('#Asire')
       a.style.display = 'block';
 
