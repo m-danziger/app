@@ -10,6 +10,8 @@ body {
 }
 
 .todo-container {
+  max-height: 570px;
+  overflow-y: auto;
   background: #d3d0d9;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;

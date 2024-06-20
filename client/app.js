@@ -197,7 +197,7 @@ async function inputfunction() {
 
 function showError() {
   document.querySelector("#sire").style.display = 'block';
-  setTimeout(hideError, 2000)
+  setTimeout(hideError, 4000)
 
   function hideError() {
     document.querySelector("#sire").style.display = 'none';
