@@ -41,6 +41,14 @@ function logingFunction() {
     // main(userIdLogin);
 }
 
+function logoutBtn() {
+    let container = document.querySelector('.todo-container');
+    container.style.display = 'none';
+    let welcomectr = document.querySelector('.login-container')
+    welcomectr.style.display = 'block'
+
+}
+
 
 function displayTitle() {
     for (let i = 0; i < TITLE.length; i++) {
