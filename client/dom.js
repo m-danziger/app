@@ -28,6 +28,10 @@ function logingFunction() {
     setTimeout(displayApp, 1000);
 
     function displayApp() {
+        let loginbtn1 = document.querySelector('#loginBtnId')
+        loginbtn1.innerText = 'Click here to login';  
+        let a = document.querySelector('#Asire')
+        a.style.display = 'none';  
         let container = document.querySelector('.todo-container');
         container.style.display = 'block';
         let welcomectr = document.querySelector('.login-container')
